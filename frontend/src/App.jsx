@@ -4,6 +4,8 @@ import { servicesData } from './data/servicesData';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ServiceCarousel from './components/ServiceCarousel';
+import InsuranceSection from './components/InsuranceSection';
 import StatsBar from './components/StatsBar';
 import Services from './components/Services';
 import WhyChooseUs from './components/WhyChooseUs';
@@ -70,22 +72,35 @@ function App() {
       />
 
       <main id="main-content">
-        {/* 2. Hero Section with hero.png background, name, tagline, Get Started & Services buttons */}
+        {/* 2. Hero Section */}
         <Hero
           lang={lang}
           t={t}
           onOpenLogin={handleOpenLogin}
         />
 
-        {/* 3. Stats & Credibility Bar */}
+        {/* 3. Service Carousel - quick visual overview after hero */}
+        <ServiceCarousel
+          services={servicesData}
+          lang={lang}
+          onSelectService={handleSelectService}
+        />
+
+        {/* 4. Stats & Credibility Bar */}
         <StatsBar t={t} />
 
-        {/* 4. Our Services Section with image cards & Know More buttons */}
+        {/* 5. Our Services Section with image cards & Know More buttons */}
         <Services
           services={servicesData}
           lang={lang}
           t={t}
           onSelectService={handleSelectService}
+        />
+
+        {/* 6. Insurance Protection Section - "Protect What Matters Most" (kept below services section) */}
+        <InsuranceSection
+          lang={lang}
+          onOpenEnquire={handleOpenEnquire}
         />
 
         {/* 5. Why Choose Us Section */}

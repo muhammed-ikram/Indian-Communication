@@ -20,7 +20,8 @@ export default function ServiceCard({ service, lang, t, onSelectService }) {
           className="service-card-img"
           loading="lazy"
         />
-        <span className="card-category-badge">{badgeText}</span>
+        <div className="card-media-overlay"></div>
+        <span className={`card-category-badge badge-${service.category}`}>{badgeText}</span>
       </div>
 
       {/* Card Body */}
