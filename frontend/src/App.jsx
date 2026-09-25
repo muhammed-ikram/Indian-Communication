@@ -1,122 +1,157 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { translations } from './data/translations';
+import { servicesData } from './data/servicesData';
+
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import StatsBar from './components/StatsBar';
+import Services from './components/Services';
+import WhyChooseUs from './components/WhyChooseUs';
+import AboutSection from './components/AboutSection';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
+import StickyEnquireBtn from './components/StickyEnquireBtn';
+import ServiceDetailModal from './components/ServiceDetailModal';
+import QuickEnquiryModal from './components/QuickEnquiryModal';
+import LoginModal from './components/LoginModal';
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Language state: 'en', 'te' or 'both'
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem('ic_lang') || 'en';
+  });
+
+  const [activeServiceModal, setActiveServiceModal] = useState(null);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [enquireModalOpen, setEnquireModalOpen] = useState(false);
+  const [preselectedService, setPreselectedService] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('ic_lang', lang);
+    document.documentElement.lang = lang === 'te' ? 'te' : 'en';
+  }, [lang]);
+
+  // Active translation dictionary
+  const currentLangKey = lang === 'te' ? 'te' : 'en';
+  const t = translations[currentLangKey];
+
+  const handleSelectService = (service) => {
+    setActiveServiceModal(service);
+  };
+
+  const handleEnquireForService = (service) => {
+    setActiveServiceModal(null);
+    setPreselectedService(service);
+    const contactEl = document.getElementById('contact');
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleOpenLogin = () => {
+    setLoginModalOpen(true);
+  };
+
+  const handleOpenEnquire = () => {
+    setEnquireModalOpen(true);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className={`app-root ${lang === 'te' ? 'font-telugu' : ''}`}>
+      {/* 1. Header with Logo & Navigation */}
+      <Navbar
+        lang={lang}
+        setLang={setLang}
+        t={t}
+        onOpenLogin={handleOpenLogin}
+        onOpenEnquire={handleOpenEnquire}
+      />
 
-      <div className="ticks"></div>
+      <main id="main-content">
+        {/* 2. Hero Section with hero.png background, name, tagline, Get Started & Services buttons */}
+        <Hero
+          lang={lang}
+          t={t}
+          onOpenLogin={handleOpenLogin}
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* 3. Stats & Credibility Bar */}
+        <StatsBar t={t} />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {/* 4. Our Services Section with image cards & Know More buttons */}
+        <Services
+          services={servicesData}
+          lang={lang}
+          t={t}
+          onSelectService={handleSelectService}
+        />
+
+        {/* 5. Why Choose Us Section */}
+        <WhyChooseUs
+          lang={lang}
+          t={t}
+        />
+
+        {/* 6. About Us Section */}
+        <AboutSection
+          lang={lang}
+          t={t}
+        />
+
+        {/* 7. Contact Us Section */}
+        <ContactSection
+          services={servicesData}
+          lang={lang}
+          t={t}
+          preselectedService={preselectedService}
+        />
+      </main>
+
+      {/* 8. Footer */}
+      <Footer
+        lang={lang}
+        setLang={setLang}
+        t={t}
+      />
+
+      {/* 9. Floating Sticky "Enquire Now" Button (Always on side/bottom-right) */}
+      <StickyEnquireBtn
+        lang={lang}
+        t={t}
+        onOpenEnquire={handleOpenEnquire}
+      />
+
+      {/* 10. Modals */}
+      {activeServiceModal && (
+        <ServiceDetailModal
+          service={activeServiceModal}
+          lang={lang}
+          t={t}
+          onClose={() => setActiveServiceModal(null)}
+          onEnquireForService={handleEnquireForService}
+        />
+      )}
+
+      {enquireModalOpen && (
+        <QuickEnquiryModal
+          services={servicesData}
+          lang={lang}
+          t={t}
+          onClose={() => setEnquireModalOpen(false)}
+        />
+      )}
+
+      {loginModalOpen && (
+        <LoginModal
+          lang={lang}
+          t={t}
+          onClose={() => setLoginModalOpen(false)}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
