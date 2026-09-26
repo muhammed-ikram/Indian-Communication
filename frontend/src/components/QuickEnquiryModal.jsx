@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { submitEnquiry } from '../services/api';
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function QuickEnquiryModal({ services, lang, t, onClose }) {
   const [formData, setFormData] = useState({
@@ -144,16 +145,17 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
             </div>
 
             <div className="quick-direct-actions">
-              <a href="tel:+919440012345" className="btn-outline-direct">
-                📞 Call +91 94400 12345
+              <a href="tel:+919885089488" className="btn-outline-direct">
+                📞 Call +91 98850 89488
               </a>
               <a
-                href={`https://wa.me/919440012345?text=${whatsappQuickMessage}`}
+                href={`https://wa.me/919848518326?text=${whatsappQuickMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-whatsapp-direct"
               >
-                💬 WhatsApp Chat
+                💬
+                WhatsApp Chat
               </a>
             </div>
           </form>

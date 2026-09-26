@@ -88,15 +88,15 @@ export default function Footer({ lang, setLang, t }) {
             </div>
             <div className="footer-contact-item">
               <span className="footer-c-icon">📞</span>
-              <a href="tel:+919440012345">+91 94400 12345</a>
+              <a href="tel:+919885089488">+91 98850 89488</a>
             </div>
             <div className="footer-contact-item">
               <span className="footer-c-icon">✉️</span>
-              <a href="mailto:support@indiancommunication.com">support@indiancommunication.com</a>
+              <a href="mailto:indiancommunicationatp@gmail.com">indiancommunicationatp@gmail.com</a>
             </div>
             <div className="footer-contact-item">
               <span className="footer-c-icon">⏰</span>
-              <span>Mon - Sat: 9:00 AM - 8:30 PM</span>
+              <span>Mon - Sat: 8:00 AM - 10:00 PM | Sunday: 10:00 AM - 2:00 PM</span>
             </div>
           </div>
         </div>

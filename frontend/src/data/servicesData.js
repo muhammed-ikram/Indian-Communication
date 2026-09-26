@@ -25,38 +25,46 @@ export const servicesData = [
     image: img1,
     category: "citizen",
     badge: {
-      en: "Citizen ID Services",
-      te: "పౌర గుర్తింపు సేవలు"
+      en: "PAN Card Services",
+      te: "పాన్ కార్డు సేవలు"
     },
     title: {
-      en: "Aadhaar & Identity Card Services",
-      te: "ఆధార్ & ప్రభుత్వ గుర్తింపు కార్డు సేవలు"
+      en: "PAN Card Application & Services",
+      te: "పాన్ కార్డు దరఖాస్తు & సేవలు"
     },
     shortDesc: {
-      en: "Biometric and demographic updates, address corrections, mobile number linking, and instant PVC Aadhaar card printing.",
-      te: "ఆధార్ బయోమెట్రిక్ మరియు వివరాల మార్పులు, మొబైల్ నంబర్ లింకింగ్, చిరునామా సవరణ మరియు తక్షణ స్మార్ట్ పీవీసీ కార్డు ప్రింటింగ్."
+      en: "New PAN card applications, corrections, reprints, address updates, and PAN-related services with quick and reliable assistance.",
+      te: "కొత్త పాన్ కార్డు దరఖాస్తులు, వివరాల సవరణలు, రీప్రింట్, చిరునామా నవీకరణ మరియు ఇతర పాన్ సంబంధిత సేవలను వేగంగా మరియు నమ్మకమైన సహాయంతో అందిస్తున్నాము."
     },
     features: {
       en: [
-        "Aadhaar demographic data correction",
-        "Mobile & Email ID seeding",
-        "High-definition PVC smart card output",
-        "Voter ID card correction & download"
+        "New PAN card application",
+        "PAN card details correction",
+        "PAN card reprint / duplicate application",
+        "PAN-Aadhaar linking assistance"
       ],
       te: [
-        "ఆధార్ వివరాలు మరియు చిరునామా సవరణ",
-        "మొబైల్ మరియు ఈమెయిల్ ఐడీ లింకింగ్",
-        "హై-క్వాలిటీ పీవీసీ స్మార్ట్ కార్డు ప్రింటింగ్",
-        "ఓటర్ ఐడీ కార్డు డౌన్‌లోడ్ మరియు కరెక్షన్"
+        "కొత్త పాన్ కార్డు దరఖాస్తు",
+        "పాన్ కార్డు వివరాల సవరణ",
+        "పాన్ కార్డు రీప్రింట్ / డూప్లికేట్ దరఖాస్తు",
+        "పాన్-ఆధార్ లింకింగ్ సహాయం"
       ]
     },
     documents: {
-      en: ["Existing Aadhaar Copy / Enrolment Slip", "Valid Proof of Identity (Voter ID/PAN/Passport)", "Address Proof / Ration Card"],
-      te: ["ప్రస్తుత ఆధార్ కాపీ లేదా రసీదు", "గుర్తింపు ధ్రువీకరణ పత్రం (ఓటర్ ఐడీ/పాన్ కార్డు)", "చిరునామా ధ్రువీకరణ / రేషన్ కార్డు"]
+      en: [
+        "Aadhaar Card / Proof of Identity",
+        "Proof of Address",
+        "Proof of Date of Birth"
+      ],
+      te: [
+        "ఆధార్ కార్డు / గుర్తింపు ధ్రువీకరణ పత్రం",
+        "చిరునామా ధ్రువీకరణ పత్రం",
+        "పుట్టిన తేదీ ధ్రువీకరణ పత్రం"
+      ]
     },
     processingTime: {
-      en: "Instant PVC Print | 24 - 48 Hours for Portal Verification",
-      te: "తక్షణ పీవీసీ ప్రింటింగ్ | 24 - 48 గంటల్లో పోర్టల్ అప్‌డేట్"
+      en: "Application Submission: Same Day | Processing Time as per Government Portal",
+      te: "దరఖాస్తు సమర్పణ: అదే రోజు | ప్రభుత్వ పోర్టల్ ప్రకారం ప్రాసెసింగ్ సమయం"
     }
   },
   {
@@ -103,38 +111,46 @@ export const servicesData = [
     image: img3,
     category: "money_transfer",
     badge: {
-      en: "Instant Transfer",
-      te: "తక్షణ బదిలీ"
+      en: "Money Transfer",
+      te: "మనీ ట్రాన్స్‌ఫర్"
     },
     title: {
-      en: "Domestic Money Transfer (DMT) & UPI",
-      te: "డొమెస్టిక్ మనీ ట్రాన్స్‌ఫర్ & యూపీఐ బదిలీ"
+      en: "Money Transfer",
+      te: "మనీ ట్రాన్స్‌ఫర్"
     },
     shortDesc: {
-      en: "Send money to any bank account across India 24/7/365 through IMPS and NEFT with instant UTR confirmation and SMS notification.",
-      te: "భారతదేశంలోని ఏ బ్యాంక్ ఖాతాకైనా తక్షణమే 24/7 ఐఎంపీఎస్ మరియు నెఫ్ట్ ద్వారా నగదు బదిలీ సౌకర్యం. తక్షణ యూటీఆర్ రసీదు."
+      en: "Transfer money securely to bank accounts across India, with transfer amounts ranging from ₹5,000 to ₹5,00,000 and convenient transaction support.",
+      te: "భారతదేశంలోని బ్యాంక్ ఖాతాలకు ₹5,000 నుండి ₹5,00,000 వరకు సురక్షితంగా నగదు బదిలీ చేసుకోవచ్చు. సులభమైన మరియు నమ్మకమైన లావాదేవీ సౌకర్యం."
     },
     features: {
       en: [
-        "Instant credit to any national or private bank",
-        "Available on holidays & Sundays",
-        "High success rate with instant UTR receipt",
-        "Support for cash-to-account deposits"
+        "Money transfers from ₹5,000 to ₹5,00,000",
+        "Transfer to bank accounts across India",
+        "Secure and reliable transactions",
+        "Transaction confirmation and receipt support"
       ],
       te: [
-        "అన్ని జాతీయ మరియు ప్రైవేట్ బ్యాంక్ ఖాతాలకు తక్షణ క్రెడిట్",
-        "ఆదివారాలు మరియు సెలవు దినాల్లో కూడా అందుబాటులో",
-        "ఖచ్చితమైన తక్షణ యూటీఆర్ ప్రింటెడ్ రసీదు",
-        "చేతిలో నగదు నుండి బ్యాంక్ ఖాతాకు నేరుగా బదిలీ"
+        "₹5,000 నుండి ₹5,00,000 వరకు మనీ ట్రాన్స్‌ఫర్",
+        "భారతదేశంలోని బ్యాంక్ ఖాతాలకు బదిలీ",
+        "సురక్షితమైన మరియు నమ్మకమైన లావాదేవీలు",
+        "లావాదేవీ నిర్ధారణ మరియు రసీదు సౌకర్యం"
       ]
     },
     documents: {
-      en: ["Sender Mobile Number", "Receiver Bank Account Number & IFSC Code", "Cash / Account Balance"],
-      te: ["పంపేవారి మొబైల్ నంబర్", "స్వీకర్త బ్యాంక్ ఖాతా నంబర్ మరియు ఐఎఫ్‌ఎస్‌సీ కోడ్", "నగదు / బ్యాంక్ బ్యాలెన్స్"]
+      en: [
+        "Sender Mobile Number",
+        "Receiver Bank Account Number & IFSC Code",
+        "Valid ID Proof"
+      ],
+      te: [
+        "పంపేవారి మొబైల్ నంబర్",
+        "స్వీకర్త బ్యాంక్ ఖాతా నంబర్ మరియు ఐఎఫ్‌ఎస్‌సీ కోడ్",
+        "చెల్లుబాటు అయ్యే గుర్తింపు పత్రం"
+      ]
     },
     processingTime: {
-      en: "Under 60 Seconds Instant Transfer",
-      te: "60 సెకన్లలోపు తక్షణ క్రెడిట్"
+      en: "Transfer Amount: ₹5,000 - ₹5,00,000 | Processing Time as per Banking Network",
+      te: "బదిలీ మొత్తం: ₹5,000 - ₹5,00,000 | బ్యాంకింగ్ నెట్‌వర్క్ ప్రకారం ప్రాసెసింగ్ సమయం"
     }
   },
   {
@@ -178,80 +194,80 @@ export const servicesData = [
   },
   {
     id: 5,
-    image: img5,
-    category: "travel",
+    image: img19,
+    category: "banking",
     badge: {
-      en: "Flight Booking",
-      te: "విమాన టికెట్లు"
+      en: "Loan Assistance",
+      te: "రుణ సహాయం"
     },
     title: {
-      en: "Air Ticket Booking (Domestic & International)",
-      te: "విమాన టికెట్ బుకింగ్ (దేశీయ & అంతర్జాతీయ)",
+      en: "Comprehensive Loan Assistance & Credit Guidance",
+      te: "అన్ని రకాల లోన్ సహాయక సేవలు (గృహ, వ్యక్తిగత, వ్యాపార)"
     },
     shortDesc: {
-      en: "Best fare deals on IndiGo, Air India, Emirates, Qatar Airways and all global carriers with seat selection and baggage add-ons.",
-      te: "ఇండిగో, ఎయిర్ ఇండియా, ఎమిరేట్స్ వంటి ప్రముఖ ఎయిర్‌లైన్స్‌లో అత్యంత తక్కువ ధరలకే దేశీయ మరియు అంతర్జాతీయ విమాన టికెట్ల బుకింగ్."
+      en: "Doorstep guidance for Home Loans, Business Expansion Loans, Personal Loans, Vehicle Finance, Education Loans, and PM Mudra/KCC loans.",
+      te: "ఇంటి నిర్మాణం, వ్యక్తిగత అవసరాలు, వ్యాపార విస్తరణ, విద్య, వాహనాలు మరియు ముద్ర లోన్ల కొరకు సరైన బ్యాంకులతో సమగ్ర రుణ సహాయం."
     },
     features: {
       en: [
-        "Special corporate & student discount fares",
-        "Extra baggage allowance booking",
-        "Web check-in and boarding pass printout",
-        "Easy cancellation & instant refund processing"
+        "Tie-ups with top national banks & NBFC lenders",
+        "Free CIBIL score check and credit profile analysis",
+        "Minimal documentation and lowest interest rates",
+        "Guidance on government subsidies and schemes"
       ],
       te: [
-        "ప్రత్యేక తగ్గింపు ఛార్జీలు & ఆఫర్లు",
-        "అదనపు లగేజ్ బుకింగ్ సదుపాయం",
-        "వెబ్ చెక్-ఇన్ మరియు బోర్డింగ్ పాస్ ప్రింట్",
-        "సులభమైన రద్దు & వేగవంతమైన రీఫండ్"
+        "ప్రముఖ జాతీయ బ్యాంకులు & ఫైనాన్స్ సంస్థలతో అనుసంధానం",
+        "ఉచిత సిబిల్ (CIBIL) స్కోర్ తనిఖీ & ప్రొఫైల్ పరిశీలన",
+        "తక్కువ వడ్డీ రేట్లతో సులభమైన డాక్యుమెంటేషన్",
+        "ప్రభుత్వ సబ్సిడీ మరియు ముద్ర పథకాల మార్గదర్శకత్వం"
       ]
     },
     documents: {
-      en: ["Government Photo ID (Aadhaar/PAN for Domestic)", "Valid Passport & Visa (for International)", "Travel Dates & Passenger Details"],
-      te: ["ప్రభుత్వ గుర్తింపు కార్డు (దేశీయ ప్రయాణానికి)", "చెల్లుబాటు అయ్యే పాస్‌పోర్ట్ & వీసా (అంతర్జాతీయ ప్రయాణానికి)", "ప్రయాణ తేదీలు మరియు వివరాలు"]
+      en: ["PAN & Aadhaar Card", "Last 6 Months Bank Statement", "Income Proof (ITR / Pay Slip / Business Sales Record)"],
+      te: ["పాన్ & ఆధార్ కార్డు", "గత 6 నెలల బ్యాంక్ స్టేట్‌మెంట్", "ఆదాయ ధ్రువీకరణ (ఐటీఆర్ / పే స్లిప్స్ / వ్యాపార రికార్డులు)"]
     },
     processingTime: {
-      en: "Instant E-Ticket Generation & WhatsApp Delivery",
-      te: "తక్షణ ఈ-టికెట్ జారీ & వాట్సాప్ డెలివరీ"
+      en: "Eligibility Check in 15 Minutes | Approval in 3-5 Working Days",
+      te: "15 నిమిషాల్లో అర్హత పరిశీలన | 3-5 రోజుల్లో లోన్ మంజూరు"
     }
   },
   {
     id: 6,
-    image: img6,
-    category: "money_transfer",
+    image: img20,
+    category: "insurance",
     badge: {
-      en: "Forex & Remittance",
-      te: "ఫారెక్స్ & విదేశీ నగదు"
+      en: "Insurance Solutions",
+      te: "సమగ్ర బీమా"
     },
     title: {
-      en: "Foreign Currency Exchange & Global Remittance",
-      te: "ఫారిన్ కరెన్సీ ఎక్స్ఛేంజ్ & విదేశీ నగదు బదిలీ"
+      en: "Comprehensive Insurance (Life, Health, Motor, General)",
+      te: "సమగ్ర బీమా సేవలు (ఆరోగ్యం, జీవితం, బైక్ & కార్)"
     },
     shortDesc: {
-      en: "Collect money sent from Gulf countries, USA, UK, Europe via Western Union, MoneyGram, and exchange foreign currencies at competitive rates.",
-      te: "గల్ఫ్ దేశాలు, అమెరికా, యూరప్ నుండి పంపిన నగదును సురక్షితంగా అందుకోండి. అత్యుత్తమ ఎక్స్ఛేంజ్ రేట్లతో విదేశీ కరెన్సీ మార్పిడి."
+      en: "Partnered with HDFC ERGO, SBI General, ICICI Lombard, TATA AIG, Bajaj Allianz & Niva Bupa. Instant policy issuance and claim assistance.",
+      te: "హెచ్‌డీఎఫ్‌సీ ఎర్గో, ఎస్‌బీఐ జనరల్, ఐసీఐసీఐ లాంబార్డ్, టాటా ఏఐజీ, బజాజ్ అలయన్జ్ సంస్థలతో ఆరోగ్య, జీవిత మరియు వాహన బీమా పాలసీలు."
     },
     features: {
       en: [
-        "Instant payout for Western Union, MoneyGram & Transfast",
-        "Competitive INR conversion rates",
-        "Forex travel card guidance for students & travellers",
-        "Transparent commission with zero hidden fee"
+        "Cashless hospitalization network across 10,000+ hospitals",
+        "Instant Bike & Car third-party & comprehensive insurance",
+        "Family Floater health plans covering pre-existing conditions",
+        "Dedicated local assistance during claim settlements"
       ],
       te: [
-        "వెస్ట్రన్ యూనియన్, మనీగ్రామ్ ద్వారా వచ్చిన నగదు తక్షణ చెల్లింపు",
-        "రూపాయి మార్పిడికి అత్యుత్తమ మార్కెట్ విలువ",
-        "విదేశాలకు వెళ్లే విద్యార్థుల కోసం ఫారెక్స్ కార్డు సహాయం",
-        "పూర్తి పారదర్శకమైన లావాదేవీలు"
+        "10,000+ ఆసుపత్రులలో నగదు రహిత (క్యాష్‌లెస్) చికిత్స",
+        "బైక్ మరియు కార్ల కొరకు తక్షణ ఇన్సూరెన్స్ కాపీ అందజేత",
+        "పూర్తి కుటుంబానికి రక్షణనిచ్చే హెల్త్ ఇన్సూరెన్స్ ప్లాన్లు",
+        "క్లెయిమ్ సమయంలో స్థానిక నిపుణుల ప్రత్యక్ష సహాయం"
       ]
     },
     documents: {
-      en: ["MTCN (Money Transfer Control Number)", "Original Government ID (Passport/Aadhaar/Voter ID)", "Sender Name & Country of Origin"],
-      te: ["ఎంటీసీఎన్ (MTCN) నంబర్", "అసలైన గుర్తింపు కార్డు (పాస్‌పోర్ట్/ఆధార్)", "నగదు పంపినవారి పేరు మరియు దేశం వివరాలు"]
+      en: ["Aadhaar & PAN of Proposer", "Vehicle RC Copy (for motor insurance)", "Existing policy details (if renewing)"],
+      te: ["ప్రతిపాదకుడి ఆధార్ & పాన్ కార్డు", "వాహనం ఆర్సీ కాపీ (వాహన బీమా కొరకు)", "గత ఇన్సూరెన్స్ పాలసీ వివరాలు (రెన్యూవల్ అయితే)"]
     },
     processingTime: {
-      en: "Cash in hand within 10 - 15 Minutes",
-      te: "10 - 15 నిమిషాల్లో నగదు చెల్లింపు"
+      en: "Instant Digital Policy Print & WhatsApp Delivery in 10 Minutes",
+      te: "10 నిమిషాల్లో పాలసీ పత్రం ప్రింట్ & వాట్సాప్ డెలివరీ"
     }
   },
   {
@@ -724,80 +740,80 @@ export const servicesData = [
   },
   {
     id: 19,
-    image: img19,
-    category: "banking",
+    image: img5,
+    category: "travel",
     badge: {
-      en: "Loan Assistance",
-      te: "రుణ సహాయం"
+      en: "Flight Booking",
+      te: "విమాన టికెట్లు"
     },
     title: {
-      en: "Comprehensive Loan Assistance & Credit Guidance",
-      te: "అన్ని రకాల లోన్ సహాయక సేవలు (గృహ, వ్యక్తిగత, వ్యాపార)"
+      en: "Air Ticket Booking (Domestic & International)",
+      te: "విమాన టికెట్ బుకింగ్ (దేశీయ & అంతర్జాతీయ)",
     },
     shortDesc: {
-      en: "Doorstep guidance for Home Loans, Business Expansion Loans, Personal Loans, Vehicle Finance, Education Loans, and PM Mudra/KCC loans.",
-      te: "ఇంటి నిర్మాణం, వ్యక్తిగత అవసరాలు, వ్యాపార విస్తరణ, విద్య, వాహనాలు మరియు ముద్ర లోన్ల కొరకు సరైన బ్యాంకులతో సమగ్ర రుణ సహాయం."
+      en: "Best fare deals on IndiGo, Air India, Emirates, Qatar Airways and all global carriers with seat selection and baggage add-ons.",
+      te: "ఇండిగో, ఎయిర్ ఇండియా, ఎమిరేట్స్ వంటి ప్రముఖ ఎయిర్‌లైన్స్‌లో అత్యంత తక్కువ ధరలకే దేశీయ మరియు అంతర్జాతీయ విమాన టికెట్ల బుకింగ్."
     },
     features: {
       en: [
-        "Tie-ups with top national banks & NBFC lenders",
-        "Free CIBIL score check and credit profile analysis",
-        "Minimal documentation and lowest interest rates",
-        "Guidance on government subsidies and schemes"
+        "Special corporate & student discount fares",
+        "Extra baggage allowance booking",
+        "Web check-in and boarding pass printout",
+        "Easy cancellation & instant refund processing"
       ],
       te: [
-        "ప్రముఖ జాతీయ బ్యాంకులు & ఫైనాన్స్ సంస్థలతో అనుసంధానం",
-        "ఉచిత సిబిల్ (CIBIL) స్కోర్ తనిఖీ & ప్రొఫైల్ పరిశీలన",
-        "తక్కువ వడ్డీ రేట్లతో సులభమైన డాక్యుమెంటేషన్",
-        "ప్రభుత్వ సబ్సిడీ మరియు ముద్ర పథకాల మార్గదర్శకత్వం"
+        "ప్రత్యేక తగ్గింపు ఛార్జీలు & ఆఫర్లు",
+        "అదనపు లగేజ్ బుకింగ్ సదుపాయం",
+        "వెబ్ చెక్-ఇన్ మరియు బోర్డింగ్ పాస్ ప్రింట్",
+        "సులభమైన రద్దు & వేగవంతమైన రీఫండ్"
       ]
     },
     documents: {
-      en: ["PAN & Aadhaar Card", "Last 6 Months Bank Statement", "Income Proof (ITR / Pay Slip / Business Sales Record)"],
-      te: ["పాన్ & ఆధార్ కార్డు", "గత 6 నెలల బ్యాంక్ స్టేట్‌మెంట్", "ఆదాయ ధ్రువీకరణ (ఐటీఆర్ / పే స్లిప్స్ / వ్యాపార రికార్డులు)"]
+      en: ["Government Photo ID (Aadhaar/PAN for Domestic)", "Valid Passport & Visa (for International)", "Travel Dates & Passenger Details"],
+      te: ["ప్రభుత్వ గుర్తింపు కార్డు (దేశీయ ప్రయాణానికి)", "చెల్లుబాటు అయ్యే పాస్‌పోర్ట్ & వీసా (అంతర్జాతీయ ప్రయాణానికి)", "ప్రయాణ తేదీలు మరియు వివరాలు"]
     },
     processingTime: {
-      en: "Eligibility Check in 15 Minutes | Approval in 3-5 Working Days",
-      te: "15 నిమిషాల్లో అర్హత పరిశీలన | 3-5 రోజుల్లో లోన్ మంజూరు"
+      en: "Instant E-Ticket Generation & WhatsApp Delivery",
+      te: "తక్షణ ఈ-టికెట్ జారీ & వాట్సాప్ డెలివరీ"
     }
   },
   {
     id: 20,
-    image: img20,
-    category: "insurance",
+    image: img6,
+    category: "money_transfer",
     badge: {
-      en: "Insurance Solutions",
-      te: "సమగ్ర బీమా"
+      en: "Forex & Remittance",
+      te: "ఫారెక్స్ & విదేశీ నగదు"
     },
     title: {
-      en: "Comprehensive Insurance (Life, Health, Motor, General)",
-      te: "సమగ్ర బీమా సేవలు (ఆరోగ్యం, జీవితం, బైక్ & కార్)"
+      en: "Foreign Currency Exchange & Global Remittance",
+      te: "ఫారిన్ కరెన్సీ ఎక్స్ఛేంజ్ & విదేశీ నగదు బదిలీ"
     },
     shortDesc: {
-      en: "Partnered with HDFC ERGO, SBI General, ICICI Lombard, TATA AIG, Bajaj Allianz & Niva Bupa. Instant policy issuance and claim assistance.",
-      te: "హెచ్‌డీఎఫ్‌సీ ఎర్గో, ఎస్‌బీఐ జనరల్, ఐసీఐసీఐ లాంబార్డ్, టాటా ఏఐజీ, బజాజ్ అలయన్జ్ సంస్థలతో ఆరోగ్య, జీవిత మరియు వాహన బీమా పాలసీలు."
+      en: "Collect money sent from Gulf countries, USA, UK, Europe via Western Union, MoneyGram, and exchange foreign currencies at competitive rates.",
+      te: "గల్ఫ్ దేశాలు, అమెరికా, యూరప్ నుండి పంపిన నగదును సురక్షితంగా అందుకోండి. అత్యుత్తమ ఎక్స్ఛేంజ్ రేట్లతో విదేశీ కరెన్సీ మార్పిడి."
     },
     features: {
       en: [
-        "Cashless hospitalization network across 10,000+ hospitals",
-        "Instant Bike & Car third-party & comprehensive insurance",
-        "Family Floater health plans covering pre-existing conditions",
-        "Dedicated local assistance during claim settlements"
+        "Instant payout for Western Union, MoneyGram & Transfast",
+        "Competitive INR conversion rates",
+        "Forex travel card guidance for students & travellers",
+        "Transparent commission with zero hidden fee"
       ],
       te: [
-        "10,000+ ఆసుపత్రులలో నగదు రహిత (క్యాష్‌లెస్) చికిత్స",
-        "బైక్ మరియు కార్ల కొరకు తక్షణ ఇన్సూరెన్స్ కాపీ అందజేత",
-        "పూర్తి కుటుంబానికి రక్షణనిచ్చే హెల్త్ ఇన్సూరెన్స్ ప్లాన్లు",
-        "క్లెయిమ్ సమయంలో స్థానిక నిపుణుల ప్రత్యక్ష సహాయం"
+        "వెస్ట్రన్ యూనియన్, మనీగ్రామ్ ద్వారా వచ్చిన నగదు తక్షణ చెల్లింపు",
+        "రూపాయి మార్పిడికి అత్యుత్తమ మార్కెట్ విలువ",
+        "విదేశాలకు వెళ్లే విద్యార్థుల కోసం ఫారెక్స్ కార్డు సహాయం",
+        "పూర్తి పారదర్శకమైన లావాదేవీలు"
       ]
     },
     documents: {
-      en: ["Aadhaar & PAN of Proposer", "Vehicle RC Copy (for motor insurance)", "Existing policy details (if renewing)"],
-      te: ["ప్రతిపాదకుడి ఆధార్ & పాన్ కార్డు", "వాహనం ఆర్సీ కాపీ (వాహన బీమా కొరకు)", "గత ఇన్సూరెన్స్ పాలసీ వివరాలు (రెన్యూవల్ అయితే)"]
+      en: ["MTCN (Money Transfer Control Number)", "Original Government ID (Passport/Aadhaar/Voter ID)", "Sender Name & Country of Origin"],
+      te: ["ఎంటీసీఎన్ (MTCN) నంబర్", "అసలైన గుర్తింపు కార్డు (పాస్‌పోర్ట్/ఆధార్)", "నగదు పంపినవారి పేరు మరియు దేశం వివరాలు"]
     },
     processingTime: {
-      en: "Instant Digital Policy Print & WhatsApp Delivery in 10 Minutes",
-      te: "10 నిమిషాల్లో పాలసీ పత్రం ప్రింట్ & వాట్సాప్ డెలివరీ"
+      en: "Cash in hand within 10 - 15 Minutes",
+      te: "10 - 15 నిమిషాల్లో నగదు చెల్లింపు"
     }
   }
 ];

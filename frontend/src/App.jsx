@@ -87,7 +87,7 @@ function App() {
         />
 
         {/* 4. Stats & Credibility Bar */}
-        <StatsBar t={t} />
+        {/* <StatsBar t={t} /> */}
 
         {/* 5. Our Services Section with image cards & Know More buttons */}
         <Services

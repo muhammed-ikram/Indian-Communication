@@ -167,8 +167,8 @@ export default function Navbar({ lang, setLang, t, onOpenLogin, onOpenEnquire })
               <span>{t.nav.enquire}</span>
             </button>
 
-            <a href="tel:+919440012345" className="mobile-call-link">
-              📞 +91 94400 12345
+            <a href="tel:+919885089488" className="mobile-call-link">
+              📞 +91 98850 89488
             </a>
           </div>
         </div>
