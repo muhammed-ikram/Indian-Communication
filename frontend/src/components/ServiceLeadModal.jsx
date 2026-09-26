@@ -87,9 +87,10 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
               <div>
                 <h3 className="modal-heading-text" style={{ marginBottom: '4px' }}>Quick Interest Form</h3>
                 <p className="modal-subheading-text" style={{ fontSize: '13px', color: '#666' }}>
-                  {serviceName
+                  {/* {serviceName
                     ? `Interested in "${serviceName}"? Share your details and we'll contact you.`
-                    : 'Share your details to explore our services.'}
+                    : 'Share your details to explore our services.'} */}
+                  Submit to explore more about the services we offer.
                 </p>
               </div>
             </div>
