@@ -1,9 +1,14 @@
 /**
  * Indian Communication API Client
  * Configured for seamless deployment across Vercel (Frontend) and Render (Backend).
+ *
+ * In development:  VITE_API_URL is empty → relative /api/* paths are proxied by Vite
+ *                  to http://localhost:5000 (see vite.config.js server.proxy).
+ *                  This ensures mobile devices on the same LAN work correctly.
+ * In production:   Set VITE_API_URL=https://your-backend.onrender.com in Vercel env vars.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 /**
  * Submit a lead from any form (Service Popup, Enquire Now, Contact Us).
