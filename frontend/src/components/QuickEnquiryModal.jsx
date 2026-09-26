@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { submitEnquiry } from '../services/api';
+import { submitLead } from '../services/api';
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function QuickEnquiryModal({ services, lang, t, onClose }) {
@@ -36,7 +36,15 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
     }
 
     try {
-      await submitEnquiry(formData);
+      await submitLead({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        source: 'Enquire Now',
+        serviceName: formData.service || '',
+      });
+      // Remember user for 2 days (skip lead popup for services too)
+      const expiry = Date.now() + 2 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('ic_lead_submitted', JSON.stringify({ name: formData.name.trim(), phone: formData.phone.trim(), expiry }));
     } catch {
       // safe fallback
     }
@@ -117,7 +125,7 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
               </div>
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label className="form-label">{t.contact.serviceLabel}</label>
               <select
                 className="form-select"
@@ -131,10 +139,10 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
             <button type="submit" className="btn-primary btn-full-width">
-              <span>Request Instant Callback</span>
+              <span>Enter</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>

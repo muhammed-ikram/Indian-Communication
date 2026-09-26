@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import logoImg from '../assets/logo.png';
+import { adminLogin } from '../services/api';
 
-export default function LoginModal({ lang, t, onClose }) {
+export default function LoginModal({ lang, t, onClose, onAdminLoginSuccess }) {
   const [activeTab, setActiveTab] = useState('customer'); // 'customer' or 'agent'
   const [phone, setPhone] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState('');
-  const [agentId, setAgentId] = useState('');
-  const [agentPassword, setAgentPassword] = useState('');
   const [authSuccess, setAuthSuccess] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
+
+  // Admin tab state
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [adminError, setAdminError] = useState('');
+  const [adminLoading, setAdminLoading] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -36,6 +41,29 @@ export default function LoginModal({ lang, t, onClose }) {
   const handleVerifyLogin = (e) => {
     e.preventDefault();
     setAuthSuccess(true);
+  };
+
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    setAdminError('');
+    if (!adminEmail.trim() || !adminPassword) {
+      setAdminError('Please enter both email and password.');
+      return;
+    }
+    setAdminLoading(true);
+    try {
+      const res = await adminLogin({ email: adminEmail.trim(), password: adminPassword });
+      if (res.success) {
+        // Pass token + email up to App
+        onAdminLoginSuccess?.({ token: res.token, email: res.email });
+      } else {
+        setAdminError(res.error || 'Invalid credentials. Please try again.');
+      }
+    } catch {
+      setAdminError('Server unreachable. Please try again.');
+    } finally {
+      setAdminLoading(false);
+    }
   };
 
   return (
@@ -73,7 +101,7 @@ export default function LoginModal({ lang, t, onClose }) {
             role="tab"
             aria-selected={activeTab === 'agent'}
             className={`login-tab ${activeTab === 'agent' ? 'active' : ''}`}
-            onClick={() => { setActiveTab('agent'); setAuthSuccess(false); setStatusMsg(''); }}
+            onClick={() => { setActiveTab('agent'); setAuthSuccess(false); setStatusMsg(''); setAdminError(''); }}
           >
             🏛️ {t.loginModal.tabAgent}
           </button>
@@ -153,38 +181,40 @@ export default function LoginModal({ lang, t, onClose }) {
             </p>
           </form>
         ) : (
-          <form onSubmit={handleVerifyLogin} className="login-form">
+          /* Admin Login Form */
+          <form onSubmit={handleAdminLogin} className="login-form">
+            {adminError && (
+              <div className="form-alert-error animate-fade-in" style={{ marginBottom: '12px' }}>
+                ⚠️ {adminError}
+              </div>
+            )}
+
             <div className="form-group">
-              <label className="form-label">{t.loginModal.agentIdLabel}</label>
+              <label className="form-label">Admin Email</label>
               <input
-                type="text"
+                type="email"
                 className="form-input"
-                value={agentId}
-                onChange={(e) => setAgentId(e.target.value)}
-                placeholder="e.g. IC-ATP-00481"
+                value={adminEmail}
+                onChange={(e) => { setAdminEmail(e.target.value); setAdminError(''); }}
+                placeholder="admin@example.com"
                 required
               />
             </div>
 
             <div className="form-group">
-              <label className="form-label">{t.loginModal.agentPassLabel}</label>
+              <label className="form-label">Password</label>
               <input
                 type="password"
                 className="form-input"
-                value={agentPassword}
-                onChange={(e) => setAgentPassword(e.target.value)}
+                value={adminPassword}
+                onChange={(e) => { setAdminPassword(e.target.value); setAdminError(''); }}
                 placeholder="••••••••••••"
                 required
               />
             </div>
 
-            <div className="biometric-row">
-              <span className="bio-icon">👆</span>
-              <span className="bio-text">Biometric RD Service Ready (Morpho / Mantra)</span>
-            </div>
-
-            <button type="submit" className="btn-primary btn-full-width">
-              <span>{t.loginModal.loginBtn}</span>
+            <button type="submit" className="btn-primary btn-full-width" disabled={adminLoading}>
+              <span>{adminLoading ? 'Signing in…' : 'Sign In to Dashboard'}</span>
             </button>
 
             <p className="login-secure-notice">

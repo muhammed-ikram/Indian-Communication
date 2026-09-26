@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { submitEnquiry } from '../services/api';
+import { submitLead } from '../services/api';
 
 // SVG Icon Components
 const PersonIcon = () => (
@@ -93,7 +93,15 @@ export default function ContactSection({ services, lang, t, preselectedService }
     if (!formData.phone.trim() || formData.phone.length < 10) { setErrorMsg('Please enter a valid 10-digit mobile number.'); return; }
     setSubmitting(true);
     try {
-      await submitEnquiry(formData);
+      await submitLead({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        source: 'Contact Us',
+        serviceName: formData.service || '',
+      });
+      // Mark user as known for 2 days
+      const expiry = Date.now() + 2 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('ic_lead_submitted', JSON.stringify({ name: formData.name.trim(), phone: formData.phone.trim(), expiry }));
       setSubmitted(true);
     } catch {
       setSubmitted(true);
