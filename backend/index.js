@@ -3,7 +3,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const dns = require('dns');
 require('dotenv').config();
+
+// Prefer IPv4 resolution to prevent IPv6 ENETUNREACH in cloud environments like Render
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,16 +42,23 @@ const leadSchema = new mongoose.Schema({
 });
 const Lead = mongoose.model('Lead', leadSchema);
 
-// ─── NODEMAILER TRANSPORTER ───────────────────────────────────────────────────
+// ─── NODEMAILER TRANSPORTER (SMTP) ───────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.FROM_MAIL?.trim(),
     pass: process.env.APP_PASSWORD?.trim()
-  }
+  },
+  connectionTimeout: 8000,
+  greetingTimeout: 8000,
+  socketTimeout: 8000
 });
 
 async function sendLeadEmail({ name, phone, source, serviceName }) {
+  const toMail = process.env.TO_MAIL?.trim() || 'ikramuk232006@gmail.com';
+  const fromMail = process.env.FROM_MAIL?.trim() || 'indiancommunicationatp@gmail.com';
   const subject = `📥 New Lead – ${source} | Indian Communication`;
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;">
@@ -66,14 +79,70 @@ async function sendLeadEmail({ name, phone, source, serviceName }) {
       </div>
     </div>
   `;
+
+  // 1. HTTP API via Resend (Works seamlessly on Render Free Tier via Port 443)
+  if (process.env.RESEND_API_KEY?.trim()) {
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY.trim()}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: process.env.RESEND_FROM?.trim() || 'Indian Communication <onboarding@resend.dev>',
+          to: [toMail],
+          subject,
+          html
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || JSON.stringify(data));
+      }
+      console.log(`📧 Email sent via Resend HTTP API for: ${name} (${phone})`);
+      return;
+    } catch (err) {
+      console.error('❌ Resend email failed:', err.message);
+    }
+  }
+
+  // 2. HTTP API via Brevo (Works seamlessly on Render Free Tier via Port 443)
+  if (process.env.BREVO_API_KEY?.trim()) {
+    try {
+      const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'api-key': process.env.BREVO_API_KEY.trim(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: 'Indian Communication', email: fromMail },
+          to: [{ email: toMail }],
+          subject,
+          htmlContent: html
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || JSON.stringify(data));
+      }
+      console.log(`📧 Email sent via Brevo HTTP API for: ${name} (${phone})`);
+      return;
+    } catch (err) {
+      console.error('❌ Brevo email failed:', err.message);
+    }
+  }
+
+  // 3. Fallback: Nodemailer SMTP
   try {
     await transporter.sendMail({
-      from: `"Indian Communication" <${process.env.FROM_MAIL?.trim()}>`,
-      to: process.env.TO_MAIL?.trim(),
+      from: `"Indian Communication" <${fromMail}>`,
+      to: toMail,
       subject,
       html
     });
-    console.log(`📧 Email sent for: ${name} (${phone})`);
+    console.log(`📧 Email sent via SMTP for: ${name} (${phone})`);
   } catch (err) {
     console.error('❌ Email send failed:', err.message);
   }
@@ -136,13 +205,18 @@ app.post('/api/leads', async (req, res) => {
       serviceName: serviceName || ''
     });
 
-    await sendLeadEmail({ name: lead.name, phone: lead.phone, source: lead.source, serviceName: lead.serviceName });
-
-    return res.status(201).json({
+    // Send HTTP response immediately so the frontend form never waits or gets stuck
+    res.status(201).json({
       success: true,
       message: 'Lead submitted successfully.',
       data: { name: lead.name, phone: lead.phone }
     });
+
+    // Send email asynchronously in background
+    sendLeadEmail({ name: lead.name, phone: lead.phone, source: lead.source, serviceName: lead.serviceName })
+      .catch((err) => console.error('❌ Background lead email error:', err.message));
+
+    return;
   } catch (err) {
     console.error('Lead save error:', err.message);
     return res.status(500).json({ success: false, error: 'Server error. Please try again.' });
@@ -159,8 +233,10 @@ app.post('/api/enquiries', async (req, res) => {
   try {
     const existing = await Lead.findOne({ phone: phone.trim() });
     if (existing) {
-      await sendLeadEmail({ name: existing.name, phone: existing.phone, source: 'Contact Us', serviceName: service || '' });
-      return res.status(200).json({ success: true, message: 'Enquiry received.', alreadyExists: true });
+      res.status(200).json({ success: true, message: 'Enquiry received.', alreadyExists: true });
+      sendLeadEmail({ name: existing.name, phone: existing.phone, source: 'Contact Us', serviceName: service || '' })
+        .catch(err => console.error('❌ Background enquiry email error:', err.message));
+      return;
     }
     const lead = await Lead.create({
       name: name.trim(),
@@ -168,8 +244,10 @@ app.post('/api/enquiries', async (req, res) => {
       source: 'Contact Us',
       serviceName: service || ''
     });
-    await sendLeadEmail({ name: lead.name, phone: lead.phone, source: 'Contact Us', serviceName: service || '' });
-    return res.status(201).json({ success: true, message: 'Enquiry submitted successfully.', data: lead });
+    res.status(201).json({ success: true, message: 'Enquiry submitted successfully.', data: lead });
+    sendLeadEmail({ name: lead.name, phone: lead.phone, source: 'Contact Us', serviceName: service || '' })
+      .catch(err => console.error('❌ Background enquiry email error:', err.message));
+    return;
   } catch (err) {
     console.error('Enquiry error:', err.message);
     return res.status(500).json({ success: false, error: 'Server error.' });

@@ -39,18 +39,24 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
     setSubmitting(true);
     setErrorMsg('');
 
-    await submitLead({
-      name: name.trim(),
-      phone: phone.trim(),
-      source: 'Service Popup',
-      serviceName: serviceName || '',
-    });
+    try {
+      await submitLead({
+        name: name.trim(),
+        phone: phone.trim(),
+        source: 'Service Popup',
+        serviceName: serviceName || '',
+      });
 
-    const expiry = Date.now() + 2 * 24 * 60 * 60 * 1000;
-    localStorage.setItem('ic_lead_submitted', JSON.stringify({ name: name.trim(), phone: phone.trim(), expiry }));
-
-    setSubmitting(false);
-    setSubmitted(true);
+      const expiry = Date.now() + 2 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('ic_lead_submitted', JSON.stringify({ name: name.trim(), phone: phone.trim(), expiry }));
+      setSubmitted(true);
+    } catch (err) {
+      console.warn('Lead submit error:', err);
+      // Still allow user to proceed
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
