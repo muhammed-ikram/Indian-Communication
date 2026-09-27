@@ -91,7 +91,7 @@ async function sendLeadEmail({ name, phone, source, serviceName }) {
         },
         body: JSON.stringify({
           from: process.env.RESEND_FROM?.trim() || 'Indian Communication <onboarding@resend.dev>',
-          to: [toMail],
+          to: [fromMail],
           subject,
           html
         })
