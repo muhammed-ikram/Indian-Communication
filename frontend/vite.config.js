@@ -10,7 +10,7 @@ export default defineConfig({
     // Proxy /api/* to the backend so mobile devices don't hit their own localhost
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://indian-communication.onrender.com',
         changeOrigin: true,
         secure: false,
       }
