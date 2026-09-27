@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'ic_secret_key_2024';
 // ─── CORS ────────────────────────────────────────────────────────────────────
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
@@ -201,6 +201,47 @@ app.get('/api/admin/leads', requireAdmin, async (req, res) => {
     return res.status(200).json({ success: true, total: leads.length, leads });
   } catch (err) {
     return res.status(500).json({ success: false, error: 'Failed to fetch leads.' });
+  }
+});
+
+// ── 5. Admin – Delete a lead by ID ─────────────────────────────────────────
+app.delete('/api/admin/leads/:id', requireAdmin, async (req, res) => {
+  try {
+    const deleted = await Lead.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ success: false, error: 'Lead not found.' });
+    return res.status(200).json({ success: true, message: 'Lead deleted successfully.' });
+  } catch (err) {
+    console.error('Delete lead error:', err.message);
+    return res.status(500).json({ success: false, error: 'Failed to delete lead.' });
+  }
+});
+
+// ── 6. Admin – Manually add a new lead ───────────────────────────────────────
+app.post('/api/admin/leads', requireAdmin, async (req, res) => {
+  const { name, phone, source, serviceName } = req.body;
+
+  if (!name?.trim() || !phone?.trim()) {
+    return res.status(400).json({ success: false, error: 'Name and phone are required.' });
+  }
+  if (!/^\d{10}$/.test(phone.trim())) {
+    return res.status(400).json({ success: false, error: 'Phone must be a 10-digit number.' });
+  }
+
+  try {
+    const existing = await Lead.findOne({ phone: phone.trim() });
+    if (existing) {
+      return res.status(409).json({ success: false, error: 'A lead with this phone number already exists.' });
+    }
+    const lead = await Lead.create({
+      name: name.trim(),
+      phone: phone.trim(),
+      source: source || 'General',
+      serviceName: serviceName || ''
+    });
+    return res.status(201).json({ success: true, message: 'Lead added successfully.', data: lead });
+  } catch (err) {
+    console.error('Admin add lead error:', err.message);
+    return res.status(500).json({ success: false, error: 'Server error. Please try again.' });
   }
 });
 

@@ -5,12 +5,6 @@ import { submitLead } from '../services/api';
  * ServiceLeadModal
  * Shows the first time a user clicks any service card / "Know More" button.
  * Remembers the user for 2 days via localStorage so it doesn't show again.
- *
- * Props:
- *  - serviceName  {string}  – name of the clicked service
- *  - onClose      {fn}      – called to dismiss the modal
- *  - onProceed    {fn}      – called after submit (or if user already submitted before)
- *                             to proceed to the ServiceDetailModal
  */
 export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
   const [name, setName] = useState('');
@@ -19,7 +13,6 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
   const [errorMsg, setErrorMsg] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Lock body scroll while modal is open
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -31,12 +24,9 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
     };
   }, [onClose]);
 
-  // Auto-proceed after success state is shown briefly
   useEffect(() => {
     if (submitted) {
-      const t = setTimeout(() => {
-        onProceed();
-      }, 1800);
+      const t = setTimeout(() => { onProceed(); }, 1800);
       return () => clearTimeout(t);
     }
   }, [submitted, onProceed]);
@@ -56,7 +46,6 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
       serviceName: serviceName || '',
     });
 
-    // Remember this user for 2 days
     const expiry = Date.now() + 2 * 24 * 60 * 60 * 1000;
     localStorage.setItem('ic_lead_submitted', JSON.stringify({ name: name.trim(), phone: phone.trim(), expiry }));
 
@@ -66,43 +55,41 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
 
   return (
     <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label="Quick Interest Form">
-      <div
-        className="modal-dialog service-lead-dialog"
-        onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: '440px' }}
-      >
-        <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close">✕</button>
+      <div className="slm-dialog" onClick={(e) => e.stopPropagation()}>
+
+        {/* Close Button */}
+        <button type="button" className="slm-close-btn" onClick={onClose} aria-label="Close">✕</button>
 
         {submitted ? (
-          <div className="modal-success-state animate-fade-in" style={{ textAlign: 'center', padding: '40px 24px' }}>
-            <div style={{ fontSize: '48px', marginBottom: '12px' }}>🎉</div>
-            <h4 style={{ margin: '0 0 8px', fontSize: '20px', color: '#1a237e' }}>Thank You, {name}!</h4>
-            <p style={{ color: '#555', fontSize: '14px' }}>Our team will reach out to you shortly on <strong>+91 {phone}</strong>.</p>
-            <p style={{ color: '#888', fontSize: '13px', marginTop: '8px' }}>Loading service details…</p>
+          <div className="slm-success animate-fade-in">
+            <div className="slm-success-icon">🎉</div>
+            <h4 className="slm-success-title">Thank You, {name}!</h4>
+            <p className="slm-success-msg">Our team will reach out to you shortly on <strong>+91 {phone}</strong>.</p>
+            <p className="slm-success-sub">Loading service details…</p>
           </div>
         ) : (
           <>
-            <div className="modal-header-clean" style={{ marginBottom: '4px' }}>
-              <div className="header-icon-circle" style={{ background: 'linear-gradient(135deg,#1a237e,#283593)' }}>🏦</div>
-              <div>
-                <h3 className="modal-heading-text" style={{ marginBottom: '4px' }}>Quick Interest Form</h3>
-                <p className="modal-subheading-text" style={{ fontSize: '13px', color: '#666' }}>
-                  {/* {serviceName
-                    ? `Interested in "${serviceName}"? Share your details and we'll contact you.`
-                    : 'Share your details to explore our services.'} */}
-                  Submit to explore more about the services we offer.
-                </p>
+            {/* Header */}
+            <div className="slm-header">
+              <div className="slm-icon-wrap">🏦</div>
+              <div className="slm-header-text">
+                <h3 className="slm-title">Quick Interest Form</h3>
+                <p className="slm-subtitle">Submit to explore more about the services we offer.</p>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="quick-enquiry-form" style={{ marginTop: '16px' }} noValidate>
-              {errorMsg && <div className="form-alert-error animate-fade-in">⚠️ {errorMsg}</div>}
+            {/* Divider */}
+            <div className="slm-divider" />
 
-              <div className="form-group">
-                <label className="form-label">Full Name <span className="req">*</span></label>
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="slm-form" noValidate>
+              {errorMsg && <div className="slm-error animate-fade-in">⚠️ {errorMsg}</div>}
+
+              <div className="slm-field">
+                <label className="slm-label">Full Name <span className="slm-req">*</span></label>
                 <input
                   type="text"
-                  className="form-input"
+                  className="slm-input"
                   value={name}
                   onChange={(e) => { setName(e.target.value); setErrorMsg(''); }}
                   placeholder="Enter your full name"
@@ -111,14 +98,14 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Mobile Number <span className="req">*</span></label>
-                <div className="input-prefix-wrap">
-                  <span className="phone-prefix">+91</span>
+              <div className="slm-field">
+                <label className="slm-label">Mobile Number <span className="slm-req">*</span></label>
+                <div className="slm-phone-wrap">
+                  <span className="slm-prefix">+91</span>
                   <input
                     type="tel"
                     maxLength="10"
-                    className="form-input with-prefix"
+                    className="slm-input slm-phone-input"
                     value={phone}
                     onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '')); setErrorMsg(''); }}
                     placeholder="10-digit number"
@@ -127,27 +114,20 @@ export default function ServiceLeadModal({ serviceName, onClose, onProceed }) {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="btn-primary btn-full-width"
-                disabled={submitting}
-                style={{ marginTop: '8px' }}
-              >
+              <button type="submit" className="slm-submit-btn" disabled={submitting}>
                 {submitting ? (
                   <span>Submitting…</span>
                 ) : (
                   <>
-                    <span>Enter</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <span>Submit</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
                   </>
                 )}
               </button>
 
-              <p style={{ textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '12px' }}>
-                🔒 Your information is private and secure.
-              </p>
+              <p className="slm-privacy">🔒 Your information is private and secure.</p>
             </form>
           </>
         )}

@@ -83,6 +83,35 @@ export async function fetchAdminLeads(token) {
   return await response.json();
 }
 
+/**
+ * Delete a lead by ID (admin-only, requires JWT token).
+ */
+export async function deleteAdminLead(token, leadId) {
+  const response = await fetch(`${API_BASE_URL}/api/admin/leads/${leadId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return await response.json();
+}
+
+/**
+ * Add a new lead manually (admin-only, requires JWT token).
+ */
+export async function addAdminLead(token, data) {
+  const response = await fetch(`${API_BASE_URL}/api/admin/leads`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
+
 export async function checkBackendHealth() {
   try {
     const res = await fetch(`${API_BASE_URL}/api/health`, { method: 'GET' });

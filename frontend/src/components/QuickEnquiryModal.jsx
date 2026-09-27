@@ -125,7 +125,7 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
               </div>
             </div>
 
-            {/* <div className="form-group">
+            <div className="form-group">
               <label className="form-label">{t.contact.serviceLabel}</label>
               <select
                 className="form-select"
@@ -139,7 +139,7 @@ export default function QuickEnquiryModal({ services, lang, t, onClose }) {
                   </option>
                 ))}
               </select>
-            </div> */}
+            </div>
 
             <button type="submit" className="btn-primary btn-full-width">
               <span>Enter</span>
