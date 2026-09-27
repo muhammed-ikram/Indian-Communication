@@ -84,7 +84,7 @@ export default function Footer({ lang, setLang, t }) {
             <h4 className="footer-heading">{t.contact.badge}</h4>
             <div className="footer-contact-item">
               <span className="footer-c-icon">📍</span>
-              <span>Main Road, Opp. SBI Branch, Anantapur, Andhra Pradesh - 515001</span>
+              <span>Opp. PTC, 4th road (Corner) Anantapur, Andhra Pradesh - 515001</span>
             </div>
             <div className="footer-contact-item">
               <span className="footer-c-icon">📞</span>

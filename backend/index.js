@@ -34,11 +34,11 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 // ─── SCHEMA / MODEL ───────────────────────────────────────────────────────────
 const leadSchema = new mongoose.Schema({
-  name:        { type: String, required: true, trim: true },
-  phone:       { type: String, required: true, trim: true, unique: true },
-  source:      { type: String, default: 'General' },
+  name: { type: String, required: true, trim: true },
+  phone: { type: String, required: true, trim: true, unique: true },
+  source: { type: String, default: 'General' },
   serviceName: { type: String, default: '' },
-  createdAt:   { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now }
 });
 const Lead = mongoose.model('Lead', leadSchema);
 
