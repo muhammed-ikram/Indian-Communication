@@ -120,11 +120,10 @@ app.post('/api/leads', async (req, res) => {
   try {
     const existing = await Lead.findOne({ phone: phone.trim() });
     if (existing) {
-      // Already in DB – still send email notification, just don't duplicate
-      await sendLeadEmail({ name: existing.name, phone: existing.phone, source: source || 'General', serviceName: serviceName || '' });
+      // Already in DB – skip email, just let them through silently
       return res.status(200).json({
         success: true,
-        message: 'Lead already exists. Notification sent.',
+        message: 'Lead already exists.',
         alreadyExists: true,
         data: { name: existing.name, phone: existing.phone }
       });
