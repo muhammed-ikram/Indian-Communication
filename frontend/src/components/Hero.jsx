@@ -13,10 +13,10 @@ export default function Hero({ lang, t, onOpenLogin }) {
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       {/* Visual Ambiance & Glow Overlays */}
-      <div className="hero-overlay"></div>
+      {/* <div className="hero-overlay"></div>
       <div className="hero-mesh-grid"></div>
       <div className="hero-glow-orb hero-glow-1"></div>
-      <div className="hero-glow-orb hero-glow-2"></div>
+      <div className="hero-glow-orb hero-glow-2"></div> */}
 
       <div className="container hero-container">
         <div className="hero-grid">
@@ -37,9 +37,9 @@ export default function Hero({ lang, t, onOpenLogin }) {
                   <span className="secondary-title">ఇండియన్ కమ్యూనికేషన్</span>
                 </>
               ) : isTelugu ? (
-                'ఇండియన్ కమ్యూనికేషన్'
+                <span className="primary-title">ఇండియన్ కమ్యూనికేషన్</span>
               ) : (
-                'Indian Communication'
+                <span className="primary-title">Indian Communication</span>
               )}
             </h1>
 
