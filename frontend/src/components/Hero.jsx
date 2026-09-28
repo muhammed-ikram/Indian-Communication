@@ -2,7 +2,7 @@ import React from 'react';
 import heroBg from '../assets/hero.png';
 import { FaWhatsapp, FaShieldAlt, FaPhoneAlt, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 
-export default function Hero({ lang, t, onOpenLogin }) {
+export default function Hero({ lang, t, onOpenLogin, onOpenEnquire }) {
   const isTelugu = lang === 'te';
   const isDual = lang === 'both';
 
@@ -118,7 +118,7 @@ export default function Hero({ lang, t, onOpenLogin }) {
               <button
                 type="button"
                 className="btn-hero-primary"
-                onClick={onOpenLogin}
+                onClick={onOpenEnquire}
                 id="hero-get-started-btn"
               >
                 <span>{t.hero.getStarted}</span>

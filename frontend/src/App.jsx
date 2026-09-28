@@ -134,7 +134,7 @@ function App() {
 
       <main id="main-content">
         {/* 2. Hero Section */}
-        <Hero lang={lang} t={t} onOpenLogin={handleOpenLogin} />
+        <Hero lang={lang} t={t} onOpenLogin={handleOpenLogin} onOpenEnquire={handleOpenEnquire} />
 
         {/* 3. Service Carousel */}
         <ServiceCarousel
